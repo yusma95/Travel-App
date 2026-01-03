@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Activate Membership – Loyalty Smart Perks</title>
+
+<style>
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #ffffff, #e3f2fd);
+  width: 375px;
+  margin: 0 auto;
+  color: #1f2937;
+}
+
+/* HEADER */
+.header {
+  padding: 22px;
+  border-radius: 0 0 26px 26px;
+  background: linear-gradient(135deg, #1a73e8, #42a5f5);
+  color: white;
+}
+
+.header h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.header p {
+  font-size: 13px;
+  margin-top: 6px;
+  opacity: 0.9;
+}
+
+/* PROGRESS */
+.progress {
+  margin-top: 14px;
+  height: 6px;
+  background: rgba(255,255,255,0.35);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.progress-bar {
+  width: 50%;
+  height: 100%;
+  background: #ffffff;
+}
+
+/* CONTENT */
+.content {
+  padding: 20px;
+}
+
+/* SECTION */
+.section-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  color: #1a73e8;
+}
+
+/* FORM */
+.form-group {
+  margin-bottom: 16px;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+input, select {
+  width: 100%;
+  padding: 13px;
+  font-size: 14px;
+  border-radius: 14px;
+  border: 1px solid #d1d5db;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #1a73e8;
+}
+
+/* ROW */
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+/* INFO */
+.info-box {
+  background: linear-gradient(135deg, #ffffff, #e3f2fd);
+  border: 1.5px dashed #1a73e8;
+  padding: 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.info-box ul {
+  padding-left: 18px;
+  margin-top: 8px;
+}
+
+/* CTA */
+.cta {
+  margin-top: 26px;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #1a73e8, #42a5f5);
+  color: white;
+  border: none;
+  border-radius: 26px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btn-secondary {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background: #f1f5f9;
+  color: #1f2937;
+  border: none;
+  border-radius: 26px;
+  font-size: 14px;
+}
+
+/* FOOTER */
+.footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 14px 0;
+  border-top: 1px solid #e5e7eb;
+  background: #ffffff;
+  margin-top: 24px;
+}
+
+.footer a {
+  text-decoration: none;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.footer a.active {
+  color: #1a73e8;
+  font-weight: 600;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Activate Membership</h1>
+  <p>Step 2 of 4 · Identity Verification</p>
+  <div class="progress">
+    <div class="progress-bar"></div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+  <div class="section-title">Personal Information</div>
+
+  <div class="form-group">
+    <label>Title</label>
+    <select>
+      <option>Mr.</option>
+      <option>Mrs.</option>
+      <option>Ms.</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Full Name</label>
+    <input type="text" placeholder="As shown on ID">
+  </div>
+
+  <div class="form-group">
+    <label>NIK</label>
+    <input type="text" placeholder="16 digit national ID">
+  </div>
+
+  <div class="form-group">
+    <label>Date of Birth</label>
+    <div class="row">
+      <input type="text" placeholder="DD">
+      <input type="text" placeholder="MM">
+      <input type="text" placeholder="YYYY">
+    </div>
+  </div>
+
+  <div class="info-box">
+    🤖 <strong>Why we need this?</strong>
+    <ul>
+      <li>Fast hotel & airport verification</li>
+      <li>Priority refund & reschedule</li>
+      <li>AI-based personalized perks</li>
+    </ul>
+  </div>
+
+  <div class="cta">
+    <button class="btn-primary" onclick="location.href='Perks.html'">
+      Activate & Continue
+    </button>
+    <button class="btn-secondary" onclick="location.href='Loyalty Smart.html'">
+      Back to Home
+    </button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <a href="Loyalty Smart.html">Home</a>
+  <a href="Activate.html" class="active">Activate</a>
+  <a href="#">Perks</a>
+  <a href="#">Profile</a>
+</div>
+
+</body>
+</html>

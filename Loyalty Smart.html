@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loyalty Smart Perks</title>
+
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #ffffff, #e0f2fe);
+    width: 375px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+}
+
+/* HEADER */
+.header {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+.header h1 {
+    font-size:24px;
+    color:#1a73e8;
+}
+.ai-badge {
+    padding:6px 12px;
+    border-radius:16px;
+    font-size:12px;
+    font-weight:600;
+    background:#e8f5e8;
+    color:#2e7d32;
+}
+
+/* CARD */
+.card {
+    background:rgba(255,255,255,0.95);
+    border-radius:22px;
+    padding:20px;
+    margin-bottom:20px;
+    transition:0.3s;
+}
+
+/* TRIP */
+.travel-card h2 { font-size:18px; }
+.travel-card p { font-size:14px; color:#666; }
+
+/* AI MASTER */
+.ai-card {
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.ai-icon {
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#1a73e8,#42a5f5);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:18px;
+}
+.ai-content h3 { font-size:16px; }
+.ai-content p { font-size:13px; color:#666; }
+
+/* TOGGLE */
+.toggle {
+    margin-left:auto;
+    width:48px;
+    height:26px;
+    position:relative;
+}
+.toggle input { display:none; }
+.slider {
+    position:absolute;
+    inset:0;
+    background:#ccc;
+    border-radius:26px;
+    transition:0.3s;
+}
+.slider:before {
+    content:"";
+    position:absolute;
+    width:20px;
+    height:20px;
+    left:3px;
+    bottom:3px;
+    background:white;
+    border-radius:50%;
+    transition:0.3s;
+}
+.toggle input:checked + .slider {
+    background:linear-gradient(135deg,#1a73e8,#42a5f5);
+}
+.toggle input:checked + .slider:before {
+    transform:translateX(22px);
+}
+
+/* TIMELINE */
+.timeline-section h4 {
+    margin-bottom:12px;
+    color:#1a73e8;
+}
+
+/* PERK */
+.perk-row {
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px;
+    border-radius:16px;
+    background:#fff;
+    margin-bottom:10px;
+    transition:0.3s;
+}
+
+/* ACTIVE */
+.perk-row.active {
+    border:2px solid #1a73e8;
+    background:linear-gradient(135deg,#ffffff,#e3f2fd);
+    box-shadow:0 8px 24px rgba(26,115,232,0.25);
+    transform:translateY(-2px);
+}
+
+/* INACTIVE */
+.perk-row.disabled {
+    opacity:0.4;
+    filter:grayscale(1) blur(0.6px);
+}
+
+/* ICON */
+.perk-icon {
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#eee;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:0.3s;
+}
+.perk-row.active .perk-icon {
+    background:linear-gradient(135deg,#1a73e8,#42a5f5);
+    color:white;
+}
+
+.perk-text {
+    flex:1;
+    font-size:14px;
+    font-weight:500;
+}
+
+/* VALUE */
+.value-card {
+    text-align:center;
+}
+.value-card p { font-size:13px; color:#666; }
+.value-amount {
+    font-size:28px;
+    font-weight:700;
+    color:#1a73e8;
+}
+
+/* CTA */
+.cta {
+    display:block;
+    width:100%;
+    padding:16px;
+    border-radius:26px;
+    background:linear-gradient(135deg,#1a73e8,#42a5f5);
+    color:white;
+    font-size:16px;
+    font-weight:600;
+    text-align:center;
+    text-decoration:none;
+}
+.cta.disabled {
+    opacity:0.4;
+    pointer-events:none;
+}
+
+/* TOAST */
+.toast {
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#1a73e8;
+    color:white;
+    padding:10px 16px;
+    border-radius:20px;
+    font-size:13px;
+    opacity:0;
+    transition:0.3s;
+}
+.toast.show { opacity:1; }
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>Loyalty Smart Perks</h1>
+    <div class="ai-badge" id="aiStatus">AI Active</div>
+</div>
+
+<div class="card travel-card">
+    <h2>Bali</h2>
+    <p>Leisure · Dec 15 – Dec 22</p>
+</div>
+
+<div class="card ai-card">
+    <div class="ai-icon">✨</div>
+    <div class="ai-content">
+        <h3>AI Recommendation</h3>
+        <p>Smart perks based on your trip behavior</p>
+    </div>
+    <label class="toggle">
+        <input type="checkbox" id="aiToggle" checked>
+        <span class="slider"></span>
+    </label>
+</div>
+
+<div class="timeline">
+
+<div class="timeline-section">
+<h4>Before Trip</h4>
+
+<div class="perk-row active" data-value="300000">
+    <div class="perk-icon">📅</div>
+    <div class="perk-text">Reschedule without fee</div>
+    <label class="toggle">
+        <input type="checkbox" checked>
+        <span class="slider"></span>
+    </label>
+</div>
+
+<div class="perk-row active" data-value="250000">
+    <div class="perk-icon">🎫</div>
+    <div class="perk-text">Auto best voucher</div>
+    <label class="toggle">
+        <input type="checkbox" checked>
+        <span class="slider"></span>
+    </label>
+</div>
+</div>
+
+<div class="timeline-section">
+<h4>During Trip</h4>
+
+<div class="perk-row" data-value="500000">
+    <div class="perk-icon">⬆️</div>
+    <div class="perk-text">AI-assisted upgrade</div>
+    <label class="toggle">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label>
+</div>
+
+<div class="perk-row" data-value="300000">
+    <div class="perk-icon">🕒</div>
+    <div class="perk-text">Late check-out</div>
+    <label class="toggle">
+        <input type="checkbox">
+        <span class="slider"></span>
+    </label>
+</div>
+</div>
+
+</div>
+
+<div class="card value-card">
+    <p>Total savings</p>
+    <div class="value-amount" id="total">Rp 550.000</div>
+</div>
+
+<!-- CTA LINK KE PAGE 2 -->
+<a href="activate.html" class="cta" id="cta">Gunakan Sekarang</a>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const aiToggle = document.getElementById("aiToggle");
+const perks = document.querySelectorAll(".perk-row");
+const totalEl = document.getElementById("total");
+const toast = document.getElementById("toast");
+const aiStatus = document.getElementById("aiStatus");
+const cta = document.getElementById("cta");
+
+function showToast(text){
+    toast.innerText = text;
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"),1500);
+}
+
+function updateTotal(){
+    let sum = 0;
+    perks.forEach(p=>{
+        if(p.classList.contains("active")){
+            sum += parseInt(p.dataset.value);
+        }
+    });
+    totalEl.innerText = "Rp " + sum.toLocaleString("id-ID");
+}
+
+function updateCTA(){
+    cta.classList.toggle("disabled", !aiToggle.checked);
+}
+
+aiToggle.addEventListener("change",()=>{
+    const on = aiToggle.checked;
+    aiStatus.innerText = on ? "AI Active" : "AI Off";
+    perks.forEach(p=>{
+        p.classList.toggle("disabled", !on);
+        p.querySelector("input").disabled = !on;
+        if(!on) p.classList.remove("active");
+    });
+    updateTotal();
+    updateCTA();
+    showToast(on ? "AI Activated" : "AI Deactivated");
+});
+
+perks.forEach(p=>{
+    const toggle = p.querySelector("input");
+    toggle.addEventListener("change",()=>{
+        p.classList.toggle("active", toggle.checked);
+        p.classList.toggle("disabled", !toggle.checked);
+        updateTotal();
+        showToast(toggle.checked ? "Perk Activated" : "Perk Disabled");
+    });
+});
+
+cta.addEventListener("click",(e)=>{
+    if(!aiToggle.checked){
+        e.preventDefault();
+        showToast("Aktifkan AI terlebih dahulu");
+    }
+});
+
+updateCTA();
+</script>
+
+</body>
+</html>
